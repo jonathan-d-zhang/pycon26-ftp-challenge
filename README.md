@@ -2,8 +2,10 @@
 
 This repository hosts a Python free-threading performance challenge for PyCon 2026.
 Participants implement a solution in `submissions/` and compete on correctness and
-runtime under Python `3.14t`. Your challenge is to implement a scheduler for a build
-system that builds all targets a quickly as possible and obeys the following constraints:
+runtime under Python `3.14t`.
+
+Your challenge is to implement a scheduler for a build system that builds all
+targets a quickly as possible while obeying the following constraints:
 
 1) Each target is built exactly once.
 2) Each target is not built until all of its dependencies have been built.
@@ -46,7 +48,7 @@ likely take advantage this fact.
 ## Evaluation
 
 Submissions are evaluated using the provided harness (see
-`challenge/harness.py`) and a the build graphs generated using the
+`challenge/harness.py`) and the build graphs generated using the
 `challenge/generate.py` script in the `graphs` directory.  We'll run each graph
 three times, take the median, and compute the speed-up as a factor relative to
 the reference solution (see `challenge/reference.py`). Each submission's final
