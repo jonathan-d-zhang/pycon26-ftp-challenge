@@ -105,7 +105,7 @@ jobs:
           git commit -m "Log submission result from ${{ github.event.workflow_run.jobs.evaluate.pr_author }}"
           git push
 
-  update_journal:
+  report_results:
     needs: run_harness
     runs-on: ubuntu-latest
     steps:
