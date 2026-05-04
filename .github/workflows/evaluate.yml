@@ -69,6 +69,7 @@ jobs:
 
       - name: Run Harness
         id: run_harness
+        timeout-minutes: 10
         run: |
           set -o errexit
           set -o pipefail
