@@ -62,10 +62,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.14t
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.14.3t"
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b
 
       - name: Run Harness
         id: run_harness
@@ -73,7 +71,7 @@ jobs:
         run: |
           set -o errexit
           set -o pipefail
-          python challenge/harness.py --num-trials 3 --json submissions/${{ github.event.pull_request.user.login }}.py graphs | tee ${{ runner.temp }}/results.txt
+          uv run --python 3.14.3t challenge/harness.py --num-trials 3 --json submissions/${{ env.PR_AUTHOR }}.py graphs | tee ${{ runner.temp }}/results.txt
           DATA=$(cat ${{ runner.temp }}/results.txt | jq -c .)
           echo "results=$DATA" >> "$GITHUB_OUTPUT"
 
