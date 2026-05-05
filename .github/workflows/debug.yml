@@ -40,6 +40,15 @@ jobs:
           cat /proc/self/limits | grep -i proc
           ulimit -u
 
+      - name: Check for allocator/preload overrides
+        run: |
+          echo "=== LD_PRELOAD ==="
+          echo "${LD_PRELOAD:-<not set>}"
+          echo "=== MALLOC vars ==="
+          env | grep -iE "malloc|alloc|ld_preload" || echo "<none>"
+          echo "=== Full env diff (service vs login) ==="
+          env | sort
+
       - name: Run Harness
         id: run_harness
         timeout-minutes: 10
